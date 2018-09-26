@@ -21,6 +21,7 @@ function descriptiveStatistics (numbers) {
   console.log(maximum(numbers))
   console.log(minimum(numbers))
   console.log(range(numbers))
+  console.log(mean(numbers))
 }
 
 function maximum (numbers) {
@@ -36,6 +37,11 @@ function minimum (numbers) {
 function range (numbers) {
   let range = maximum(numbers) - minimum(numbers)
   return range
+}
+
+function mean (numbers) {
+  let mean = numbers.reduce((a, b) => a + b, 0) / numbers.length
+  return mean
 }
 // Exports
 exports.descriptiveStatistics = descriptiveStatistics
