@@ -20,6 +20,7 @@
 function descriptiveStatistics (numbers) {
   console.log(maximum(numbers))
   console.log(minimum(numbers))
+  console.log(range(numbers))
 }
 
 function maximum (numbers) {
@@ -32,12 +33,16 @@ function minimum (numbers) {
   return min
 }
 
+function range (numbers) {
+  let range = maximum(numbers) - minimum(numbers)
+  return range
+}
 // Exports
 exports.descriptiveStatistics = descriptiveStatistics
 exports.maximum = maximum
 exports.mean = undefined
 exports.median = undefined
-exports.minimum = undefined
+exports.minimum = minimum
 exports.mode = undefined
-exports.range = undefined
+exports.range = range
 exports.standardDeviation = undefined
