@@ -19,11 +19,17 @@
  */
 function descriptiveStatistics (numbers) {
   console.log(maximum(numbers))
+  console.log(minimum(numbers))
 }
 
 function maximum (numbers) {
   let max = numbers.reduce(function (a, b) { return Math.max(a, b) })
   return max
+}
+
+function minimum (numbers) {
+  let min = numbers.reduce(function (a, b) { return Math.min(a, b) })
+  return min
 }
 
 // Exports
