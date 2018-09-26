@@ -1,7 +1,7 @@
 /**
  * Module for obtaining descriptive information about a set of data.
  *
- * @author TODO: Write your name here.
+ * @author Jim Disenstam
  * @version 1.1.0
  */
 
@@ -18,14 +18,17 @@
  * @returns {{maximum: number, mean: number, median: number, minimum: number, mode: number[], range: number, standardDeviation: number}}
  */
 function descriptiveStatistics (numbers) {
-    // TODO: Write your code here.
+  console.log(maximum(numbers))
 }
 
-// TODO: Write your code here.
+function maximum (numbers) {
+  let max = numbers.reduce(function (a, b) { return Math.max(a, b) })
+  return max
+}
 
 // Exports
 exports.descriptiveStatistics = descriptiveStatistics
-exports.maximum = undefined
+exports.maximum = maximum
 exports.mean = undefined
 exports.median = undefined
 exports.minimum = undefined
