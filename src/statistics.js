@@ -17,37 +17,38 @@
  * @throws {TypeError} The passed array contains not just numbers.
  * @returns {{maximum: number, mean: number, median: number, minimum: number, mode: number[], range: number, standardDeviation: number}}
  */
-function descriptiveStatistics(numbers) {
+function descriptiveStatistics (numbers) {
   console.log(maximum(numbers))
   console.log(minimum(numbers))
   console.log(range(numbers))
   console.log(mean(numbers))
   console.log(median(numbers))
   console.log(standardDeviation(numbers))
+  console.log(mode(numbers))
 }
 
-function maximum(numbers) {
-  let max = numbers.reduce(function (a, b) { return Math.max(a, b) })
+function maximum (numbers) {
+  let max = numbers.reduce(function (a, b) { return Math.max(a, b) }) // gör om till arrow function?
   return max
 }
 
-function minimum(numbers) {
-  let min = numbers.reduce(function (a, b) { return Math.min(a, b) })
+function minimum (numbers) {
+  let min = numbers.reduce(function (a, b) { return Math.min(a, b) }) // gör om till arrow function?
   return min
 }
 
-function range(numbers) {
+function range (numbers) {
   let range = maximum(numbers) - minimum(numbers)
   return range
 }
 
-function mean(numbers) {
+function mean (numbers) {
   let mean = numbers.reduce((a, b) => a + b, 0) / numbers.length
   return mean
 }
 
-function median(numbers) {
-  let sortedNumbers = numbers.slice(0).sort(function (a, b) { return a - b })
+function median (numbers) {
+  let sortedNumbers = numbers.slice(0).sort(function (a, b) { return a - b }) // gör om till arrow function?
   let begin = Math.round(sortedNumbers.length / 2) - 1
   let end = begin + 2
   if (sortedNumbers.length % 2) {
@@ -57,12 +58,25 @@ function median(numbers) {
   return median
 }
 
-function standardDeviation(numbers) {
+function standardDeviation (numbers) {
   let numerator = numbers.map(function (a) {
     return Math.pow((a - mean(numbers)), 2)
-  })
+  }) // gör om till arrow function?
   let standardDeviation = Math.sqrt(mean(numerator))
   return standardDeviation
+}
+
+function mode (numbers) {
+  let countInstances = numbers.reduce(function (allInstances, instance) {
+    if (instance in allInstances) {
+      allInstances[instance]++
+    } else {
+      allInstances[instance] = 1
+    }
+    return allInstances
+  }, {}) // gör om till arrow function?
+
+  // OBS glöm ej att det kan finnas flera modes eller inget mode!
 }
 
 // Exports
