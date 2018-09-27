@@ -24,7 +24,7 @@ function descriptiveStatistics (numbers) {
   console.log(mean(numbers))
   console.log(median(numbers))
   console.log(standardDeviation(numbers))
-  console.log(mode(numbers))
+  console.log(mode([4, 2, 5, 1, 2, 5, 3, 3, 3]))
 }
 
 function maximum (numbers) {
@@ -66,18 +66,29 @@ function standardDeviation (numbers) {
   return standardDeviation
 }
 
-function mode (numbers) {
-  // FORTSÄTT HÄR!
-  let countInstances = numbers.reduce(function (allInstances, instance) {
-    if (instance in allInstances) {
-      allInstances[instance]++
+function mode (numbers) { // försök förenkla denna!!!
+  let sortedNumbers = numbers.sort((a, b) => (a - b))
+  console.log(sortedNumbers)
+  let previousNumber = ''
+  let counter = 1
+  let counterMax = 1
+  let mode = []
+  for (let i = 0; i < sortedNumbers.length; i++) {
+    if (sortedNumbers[i] === previousNumber) {
+      counter++
+      if (counter > counterMax) {
+        mode = [sortedNumbers[i]]
+      }
+      if (counter === counterMax) {
+        mode.push(sortedNumbers[i])
+      }
+      counterMax = counter
     } else {
-      allInstances[instance] = 1
+      previousNumber = sortedNumbers[i]
+      counter = 1
     }
-    return allInstances
-  }, {})
-  console.log(countInstances)
-  // OBS glöm ej att det kan finnas flera modes eller inget mode!
+  }
+  return mode
 }
 
 // Exports
@@ -86,6 +97,6 @@ exports.maximum = maximum
 exports.mean = mean
 exports.median = median
 exports.minimum = minimum
-exports.mode = undefined
+exports.mode = mode
 exports.range = range
 exports.standardDeviation = standardDeviation
