@@ -28,12 +28,12 @@ function descriptiveStatistics (numbers) {
 }
 
 function maximum (numbers) {
-  let max = numbers.reduce(function (a, b) { return Math.max(a, b) }) // gör om till arrow function?
+  let max = Math.max(...numbers)
   return max
 }
 
 function minimum (numbers) {
-  let min = numbers.reduce(function (a, b) { return Math.min(a, b) }) // gör om till arrow function?
+  let min = Math.min(...numbers)
   return min
 }
 
@@ -67,6 +67,7 @@ function standardDeviation (numbers) {
 }
 
 function mode (numbers) {
+  // FORTSÄTT HÄR!
   let countInstances = numbers.reduce(function (allInstances, instance) {
     if (instance in allInstances) {
       allInstances[instance]++
@@ -74,8 +75,8 @@ function mode (numbers) {
       allInstances[instance] = 1
     }
     return allInstances
-  }, {}) // gör om till arrow function?
-
+  }, {})
+  console.log(countInstances)
   // OBS glöm ej att det kan finnas flera modes eller inget mode!
 }
 
