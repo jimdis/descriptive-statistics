@@ -17,29 +17,32 @@
  * @throws {TypeError} The passed array contains not just numbers.
  * @returns {{maximum: number, mean: number, median: number, minimum: number, mode: number[], range: number, standardDeviation: number}}
  */
+
 function descriptiveStatistics (numbers) {
-  console.log(maximum(numbers))
-  console.log(minimum(numbers))
-  console.log(range(numbers))
-  console.log(mean(numbers))
-  console.log(median(numbers))
-  console.log(standardDeviation(numbers))
-  console.log(mode([4, 2, 5, 1, 2, 5, 3, 3, 3]))
+  if (!Array.isArray(numbers)) {
+    throw TypeError('The passed argument is not an array.')
+  }
+  if (!numbers.length) {
+    throw Error('The passed array contains no elements.')
+  }
+  if (!numbers.every(a => !isNaN(a))) {
+    throw TypeError('The passed array contains not just numbers.')
+  }
+  let result = {
+    maximum: maximum(numbers),
+    mean: mean(numbers),
+    median: median(numbers),
+    minumum: minimum(numbers),
+    mode: mode(numbers),
+    range: range(numbers),
+    standardDeviation: standardDeviation(numbers)
+  }
+  return result
 }
 
 function maximum (numbers) {
   let max = Math.max(...numbers)
   return max
-}
-
-function minimum (numbers) {
-  let min = Math.min(...numbers)
-  return min
-}
-
-function range (numbers) {
-  let range = maximum(numbers) - minimum(numbers)
-  return range
 }
 
 function mean (numbers) {
@@ -58,12 +61,9 @@ function median (numbers) {
   return median
 }
 
-function standardDeviation (numbers) {
-  let numerator = numbers.map(function (a) {
-    return Math.pow((a - mean(numbers)), 2)
-  }) // gör om till arrow function?
-  let standardDeviation = Math.sqrt(mean(numerator))
-  return standardDeviation
+function minimum (numbers) {
+  let min = Math.min(...numbers)
+  return min
 }
 
 function mode (numbers) { // försök förenkla denna!!!
@@ -89,6 +89,19 @@ function mode (numbers) { // försök förenkla denna!!!
     }
   }
   return mode
+}
+
+function range (numbers) {
+  let range = maximum(numbers) - minimum(numbers)
+  return range
+}
+
+function standardDeviation (numbers) {
+  let numerator = numbers.map(function (a) {
+    return Math.pow((a - mean(numbers)), 2)
+  }) // gör om till arrow function?
+  let standardDeviation = Math.sqrt(mean(numerator))
+  return standardDeviation
 }
 
 // Exports
