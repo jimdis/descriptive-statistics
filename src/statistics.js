@@ -19,15 +19,6 @@
  */
 
 function descriptiveStatistics (numbers) {
-  if (!Array.isArray(numbers)) {
-    throw TypeError('The passed argument is not an array.')
-  }
-  if (!numbers.length) {
-    throw Error('The passed array contains no elements.')
-  }
-  if (!numbers.every(a => !isNaN(a))) {
-    throw TypeError('The passed array contains not just numbers.')
-  }
   let result = {
     maximum: maximum(numbers),
     mean: mean(numbers),
@@ -40,18 +31,34 @@ function descriptiveStatistics (numbers) {
   return result
 }
 
+function sortNumbers (numbers) {
+  if (!Array.isArray(numbers)) {
+    throw TypeError('The passed argument is not an array.')
+  }
+  if (!numbers.length) {
+    throw Error('The passed array contains no elements.')
+  }
+  if (!numbers.every(a => !isNaN(a))) {
+    throw TypeError('The passed array contains not just numbers.')
+  }
+  let sortedNumbers = numbers.slice(0).sort(function (a, b) { return a - b })
+  return sortedNumbers
+}
+
 function maximum (numbers) {
-  let max = Math.max(...numbers)
+  let sortedNumbers = sortNumbers(numbers)
+  let max = Math.max(...sortedNumbers)
   return max
 }
 
 function mean (numbers) {
-  let mean = numbers.reduce((a, b) => a + b, 0) / numbers.length
+  let sortedNumbers = sortNumbers(numbers)
+  let mean = sortedNumbers.reduce((a, b) => a + b, 0) / sortedNumbers.length
   return mean
 }
 
 function median (numbers) {
-  let sortedNumbers = numbers.slice(0).sort(function (a, b) { return a - b }) // gör om till arrow function?
+  let sortedNumbers = sortNumbers(numbers)
   let begin = Math.round(sortedNumbers.length / 2) - 1
   let end = begin + 2
   if (sortedNumbers.length % 2) {
@@ -62,13 +69,13 @@ function median (numbers) {
 }
 
 function minimum (numbers) {
-  let min = Math.min(...numbers)
+  let sortedNumbers = sortNumbers(numbers)
+  let min = Math.min(...sortedNumbers)
   return min
 }
 
 function mode (numbers) { // försök förenkla denna!!!
-  let sortedNumbers = numbers.sort((a, b) => (a - b))
-  console.log(sortedNumbers)
+  let sortedNumbers = sortNumbers(numbers)
   let previousNumber = ''
   let counter = 1
   let counterMax = 1
@@ -92,13 +99,15 @@ function mode (numbers) { // försök förenkla denna!!!
 }
 
 function range (numbers) {
-  let range = maximum(numbers) - minimum(numbers)
+  let sortedNumbers = sortNumbers(numbers)
+  let range = maximum(sortedNumbers) - minimum(sortedNumbers)
   return range
 }
 
 function standardDeviation (numbers) {
-  let numerator = numbers.map(function (a) {
-    return Math.pow((a - mean(numbers)), 2)
+  let sortedNumbers = sortNumbers(numbers)
+  let numerator = sortedNumbers.map(function (a) {
+    return Math.pow((a - mean(sortedNumbers)), 2)
   }) // gör om till arrow function?
   let standardDeviation = Math.sqrt(mean(numerator))
   return standardDeviation
