@@ -23,7 +23,7 @@ function descriptiveStatistics (numbers) {
     maximum: maximum(numbers),
     mean: mean(numbers),
     median: median(numbers),
-    minumum: minimum(numbers),
+    minimum: minimum(numbers),
     mode: mode(numbers),
     range: range(numbers),
     standardDeviation: standardDeviation(numbers)
@@ -38,7 +38,7 @@ function sortNumbers (numbers) {
   if (!numbers.length) {
     throw Error('The passed array contains no elements.')
   }
-  if (!numbers.every(a => !isNaN(a))) {
+  if (!numbers.every(a => typeof a === 'number')) {
     throw TypeError('The passed array contains not just numbers.')
   }
   let sortedNumbers = numbers.slice(0).sort(function (a, b) { return a - b })
@@ -79,17 +79,16 @@ function mode (numbers) { // försök förenkla denna!!!
   let previousNumber = ''
   let counter = 1
   let counterMax = 1
-  let mode = []
+  let mode = sortedNumbers
   for (let i = 0; i < sortedNumbers.length; i++) {
     if (sortedNumbers[i] === previousNumber) {
       counter++
       if (counter > counterMax) {
         mode = [sortedNumbers[i]]
-      }
-      if (counter === counterMax) {
+        counterMax = counter
+      } else if (counter === counterMax) {
         mode.push(sortedNumbers[i])
       }
-      counterMax = counter
     } else {
       previousNumber = sortedNumbers[i]
       counter = 1
