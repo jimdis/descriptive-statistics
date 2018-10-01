@@ -51,7 +51,7 @@ function sortNumbers (numbers) {
   if (!numbers.every(a => typeof a === 'number')) {
     throw TypeError('The passed array contains not just numbers.')
   }
-  let sortedNumbers = numbers.slice(0).sort(function (a, b) { return a - b })
+  let sortedNumbers = numbers.slice(0).sort((a, b) => a - b)
   return sortedNumbers
 }
 
@@ -185,9 +185,7 @@ function range (numbers) {
 
 function standardDeviation (numbers) {
   let sortedNumbers = sortNumbers(numbers)
-  let numerator = sortedNumbers.map(function (a) {
-    return Math.pow((a - mean(sortedNumbers)), 2)
-  })
+  let numerator = sortedNumbers.map((a) => Math.pow((a - mean(sortedNumbers)), 2))
   let standardDeviation = Math.sqrt(mean(numerator))
   return standardDeviation
 }
