@@ -31,6 +31,16 @@ function descriptiveStatistics (numbers) {
   return result
 }
 
+/**
+ * Takes an array of numbers and returns a sorted array of all numbers in the array, after testing for errors.
+ *
+ * @param {number[]} numbers The set of data to be analyzed.
+ * @throws {TypeError} The passed argument is not an array.
+ * @throws {Error} The passed array contains no elements.
+ * @throws {TypeError} The passed array contains not just numbers.
+ * @returns {number[]} A sorted array of the numbers in the passed array.
+ */
+
 function sortNumbers (numbers) {
   if (!Array.isArray(numbers)) {
     throw TypeError('The passed argument is not an array.')
@@ -45,17 +55,47 @@ function sortNumbers (numbers) {
   return sortedNumbers
 }
 
+/**
+ * Returns the maximum value from a set of numbers.
+ *
+ * @param {number[]} numbers The set of data to be analyzed.
+ * @throws {TypeError} The passed argument is not an array.
+ * @throws {Error} The passed array contains no elements.
+ * @throws {TypeError} The passed array contains not just numbers.
+ * @returns {number} The maximum value in the set of data.
+ */
+
 function maximum (numbers) {
   let sortedNumbers = sortNumbers(numbers)
   let max = Math.max(...sortedNumbers)
   return max
 }
 
+/**
+ * Returns the mean value from a set of numbers.
+ *
+ * @param {number[]} numbers The set of data to be analyzed.
+ * @throws {TypeError} The passed argument is not an array.
+ * @throws {Error} The passed array contains no elements.
+ * @throws {TypeError} The passed array contains not just numbers.
+ * @returns {number} The mean value in the set of data.
+ */
+
 function mean (numbers) {
   let sortedNumbers = sortNumbers(numbers)
   let mean = sortedNumbers.reduce((a, b) => a + b, 0) / sortedNumbers.length
   return mean
 }
+
+/**
+ * Returns the median value from a set of numbers.
+ *
+ * @param {number[]} numbers The set of data to be analyzed.
+ * @throws {TypeError} The passed argument is not an array.
+ * @throws {Error} The passed array contains no elements.
+ * @throws {TypeError} The passed array contains not just numbers.
+ * @returns {number} The median value in the set of data.
+ */
 
 function median (numbers) {
   let sortedNumbers = sortNumbers(numbers)
@@ -68,18 +108,38 @@ function median (numbers) {
   return median
 }
 
+/**
+ * Returns the minimum value from a set of numbers.
+ *
+ * @param {number[]} numbers The set of data to be analyzed.
+ * @throws {TypeError} The passed argument is not an array.
+ * @throws {Error} The passed array contains no elements.
+ * @throws {TypeError} The passed array contains not just numbers.
+ * @returns {number} The minimum value in the set of data.
+ */
+
 function minimum (numbers) {
   let sortedNumbers = sortNumbers(numbers)
   let min = Math.min(...sortedNumbers)
   return min
 }
 
-function mode (numbers) { // försök förenkla denna!!!
+/**
+ * Returns the mode from a set of numbers.
+ *
+ * @param {number[]} numbers The set of data to be analyzed.
+ * @throws {TypeError} The passed argument is not an array.
+ * @throws {Error} The passed array contains no elements.
+ * @throws {TypeError} The passed array contains not just numbers.
+ * @returns {number[]} The mode in the set of data.
+ */
+
+function mode (numbers) {
   let sortedNumbers = sortNumbers(numbers)
   let previousNumber = ''
   let counter = 1
   let counterMax = 1
-  let mode = sortedNumbers
+  let mode = sortedNumbers // If passed argument contains only one number the for loop will not alter mode.
   for (let i = 0; i < sortedNumbers.length; i++) {
     if (sortedNumbers[i] === previousNumber) {
       counter++
@@ -97,17 +157,37 @@ function mode (numbers) { // försök förenkla denna!!!
   return mode
 }
 
+/**
+ * Returns the range from a set of numbers.
+ *
+ * @param {number[]} numbers The set of data to be analyzed.
+ * @throws {TypeError} The passed argument is not an array.
+ * @throws {Error} The passed array contains no elements.
+ * @throws {TypeError} The passed array contains not just numbers.
+ * @returns {number} The range in the set of data.
+ */
+
 function range (numbers) {
   let sortedNumbers = sortNumbers(numbers)
   let range = maximum(sortedNumbers) - minimum(sortedNumbers)
   return range
 }
 
+/**
+ * Returns the standard deviation from a set of numbers.
+ *
+ * @param {number[]} numbers The set of data to be analyzed.
+ * @throws {TypeError} The passed argument is not an array.
+ * @throws {Error} The passed array contains no elements.
+ * @throws {TypeError} The passed array contains not just numbers.
+ * @returns {number} The standard deviation in the set of data.
+ */
+
 function standardDeviation (numbers) {
   let sortedNumbers = sortNumbers(numbers)
   let numerator = sortedNumbers.map(function (a) {
     return Math.pow((a - mean(sortedNumbers)), 2)
-  }) // gör om till arrow function?
+  })
   let standardDeviation = Math.sqrt(mean(numerator))
   return standardDeviation
 }
