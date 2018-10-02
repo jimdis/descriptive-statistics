@@ -32,7 +32,8 @@ function descriptiveStatistics (numbers) {
 }
 
 /**
- * Takes an array of numbers and returns a sorted array of all numbers in the array, after testing for errors.
+ * Takes an array of numbers and returns a sorted array of all numbers
+ * in the array, after testing for errors.
  *
  * @param {number[]} numbers The set of data to be analyzed.
  * @throws {TypeError} The passed argument is not an array.
@@ -67,8 +68,8 @@ function sortNumbers (numbers) {
 
 function maximum (numbers) {
   let sortedNumbers = sortNumbers(numbers)
-  let max = Math.max(...sortedNumbers)
-  return max
+  let maximum = sortedNumbers.pop()
+  return maximum
 }
 
 /**
@@ -120,7 +121,7 @@ function median (numbers) {
 
 function minimum (numbers) {
   let sortedNumbers = sortNumbers(numbers)
-  let min = Math.min(...sortedNumbers)
+  let min = sortedNumbers[0]
   return min
 }
 
@@ -139,7 +140,7 @@ function mode (numbers) {
   let previousNumber = ''
   let counter = 1
   let counterMax = 1
-  let mode = sortedNumbers // If passed argument contains only one number the for loop will not alter mode.
+  let mode = sortedNumbers // If passed argument contains only one number.
   for (let i = 0; i < sortedNumbers.length; i++) {
     if (sortedNumbers[i] === previousNumber) {
       counter++
@@ -185,8 +186,9 @@ function range (numbers) {
 
 function standardDeviation (numbers) {
   let sortedNumbers = sortNumbers(numbers)
-  let numerator = sortedNumbers.map((a) => Math.pow((a - mean(sortedNumbers)), 2))
-  let standardDeviation = Math.sqrt(mean(numerator))
+  let squaredDiff = sortedNumbers.map((a) =>
+    Math.pow((a - mean(sortedNumbers)), 2))
+  let standardDeviation = Math.sqrt(mean(squaredDiff))
   return standardDeviation
 }
 
