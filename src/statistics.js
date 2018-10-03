@@ -52,8 +52,7 @@ function sortNumbers (numbers) {
   if (!numbers.every(a => typeof a === 'number')) {
     throw TypeError('The passed array contains not just numbers.')
   }
-  let sortedNumbers = numbers.slice(0).sort((a, b) => a - b)
-  return sortedNumbers
+  return numbers.slice().sort((a, b) => a - b)
 }
 
 /**
@@ -84,7 +83,7 @@ function maximum (numbers) {
 
 function mean (numbers) {
   let sortedNumbers = sortNumbers(numbers)
-  let mean = sortedNumbers.reduce((a, b) => a + b, 0) / sortedNumbers.length
+  let mean = sortedNumbers.reduce((a, b) => a + b) / sortedNumbers.length
   return mean
 }
 
@@ -100,12 +99,12 @@ function mean (numbers) {
 
 function median (numbers) {
   let sortedNumbers = sortNumbers(numbers)
-  let begin = Math.round(sortedNumbers.length / 2) - 1
-  let end = begin + 2
+  let firstIndex = Math.round(sortedNumbers.length / 2) - 1
+  let secondIndex = firstIndex + 2
   if (sortedNumbers.length % 2) {
-    end = begin + 1
+    secondIndex = firstIndex + 1
   }
-  let median = mean(sortedNumbers.slice(begin, end))
+  let median = mean(sortedNumbers.slice(firstIndex, secondIndex))
   return median
 }
 
@@ -186,9 +185,8 @@ function range (numbers) {
 
 function standardDeviation (numbers) {
   let sortedNumbers = sortNumbers(numbers)
-  let squaredDiff = sortedNumbers.map((a) =>
-    Math.pow((a - mean(sortedNumbers)), 2))
-  let standardDeviation = Math.sqrt(mean(squaredDiff))
+  let sqDiffs = sortedNumbers.map(x => Math.pow((x - mean(sortedNumbers)), 2))
+  let standardDeviation = Math.sqrt(mean(sqDiffs))
   return standardDeviation
 }
 
